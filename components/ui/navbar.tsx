@@ -2,11 +2,15 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { GlobeIcon, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const currentLang = pathname.split('/')[1];
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -18,21 +22,30 @@ export function Navbar() {
     }
   };
 
-  // 菜单项配置
-  const menuItems = [
-    { href: '/', label: '首页' },
-    { href: '/countries', label: '国家索引' },
-    { href: '/formats', label: '下载说明' },
-    { href: '/about', label: '关于我们' },
-  ];
+  // 菜单项配置 - 基于当前语言
+  const menuItems = currentLang === 'en' 
+    ? [
+        { href: `/${currentLang}`, label: 'Home' },
+        { href: `/${currentLang}/countries`, label: 'Country Index' },
+        { href: `/${currentLang}/formats`, label: 'Download Info' },
+        { href: `/${currentLang}/about`, label: 'About Us' },
+      ]
+    : [
+        { href: `/${currentLang}`, label: '首页' },
+        { href: `/${currentLang}/countries`, label: '国家索引' },
+        { href: `/${currentLang}/formats`, label: '下载说明' },
+        { href: `/${currentLang}/about`, label: '关于我们' },
+      ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container-custom flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <GlobeIcon className="h-6 w-6 text-primary-600" />
-          <Link href="/" className="text-lg font-heading font-bold">
-            <span className="text-primary-600">国家轮廓图</span>
+          <Link href={`/${currentLang}`} className="text-lg font-heading font-bold">
+            <span className="text-primary-600">
+              {currentLang === 'en' ? 'Country Outlines' : '国家轮廓图'}
+            </span>
           </Link>
         </div>
         
@@ -47,21 +60,29 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
+          <div className="ml-4">
+            <LanguageSwitcher />
+          </div>
         </nav>
         
         {/* 移动端汉堡菜单按钮 */}
-        <button 
-          className="p-2 text-gray-700 rounded-md md:hidden hover:bg-gray-100 focus:outline-none"
-          onClick={toggleMenu}
-          aria-label={isMenuOpen ? "关闭菜单" : "打开菜单"}
-          aria-expanded={isMenuOpen}
-        >
-          {isMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
-        </button>
+        <div className="flex items-center md:hidden">
+          <div className="mr-4">
+            <LanguageSwitcher />
+          </div>
+          <button 
+            className="p-2 text-gray-700 rounded-md hover:bg-gray-100 focus:outline-none"
+            onClick={toggleMenu}
+            aria-label={isMenuOpen ? (currentLang === 'en' ? "Close Menu" : "关闭菜单") : (currentLang === 'en' ? "Open Menu" : "打开菜单")}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+        </div>
       </div>
       
       {/* 移动端菜单 */}
@@ -85,11 +106,11 @@ export function Navbar() {
           ))}
           
           <div className="pt-6 mt-6 border-t border-gray-200">
-            <p className="text-sm text-gray-500 mb-4">快速搜索</p>
+            <p className="text-sm text-gray-500 mb-4">{currentLang === 'en' ? 'Quick Search' : '快速搜索'}</p>
             <div className="relative">
               <input
                 type="search"
-                placeholder="输入国家或 ISO 代码..."
+                placeholder={currentLang === 'en' ? 'Enter country or ISO code...' : '输入国家或 ISO 代码...'}
                 className="w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent"
               />
               <button className="absolute right-0 top-0 h-full px-4 text-gray-500">

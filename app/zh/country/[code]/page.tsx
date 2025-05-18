@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DownloadIcon, ArrowLeftIcon, GlobeIcon } from 'lucide-react';
-import { generateCountryMetadata } from '@/app/seo';
 
 // 这里仅作演示用途，实际中应该从数据库或API获取
 const countryData = {
@@ -25,7 +24,18 @@ export async function generateMetadata({ params }: { params: { code: string } })
     };
   }
   
-  return generateCountryMetadata(country);
+  return {
+    title: `${country.name}轮廓地图 - 免费SVG下载`,
+    description: `免费提供高质量${country.name}矢量轮廓地图，支持SVG、EPS和PNG格式，适用于网页设计、数据可视化等项目。`,
+    keywords: [`${country.name}轮廓`, `${country.name}地图`, `${country.name}矢量`, `${country.name}边界`, `${country.code}地图`],
+    alternates: {
+      canonical: `/zh/country/${params.code.toLowerCase()}`,
+      languages: {
+        'zh-CN': `/zh/country/${params.code.toLowerCase()}`,
+        'en-US': `/en/country/${params.code.toLowerCase()}`,
+      },
+    },
+  };
 }
 
 export default function CountryPage({ params }: { params: { code: string } }) {
@@ -38,7 +48,7 @@ export default function CountryPage({ params }: { params: { code: string } }) {
         <h1 className="text-3xl font-bold mb-6">国家未找到</h1>
         <p className="mb-8">抱歉，您请求的国家轮廓图不存在或已移除。</p>
         <Button asChild>
-          <Link href="/">
+          <Link href="/zh">
             <ArrowLeftIcon className="mr-2 h-4 w-4" /> 返回首页
           </Link>
         </Button>
@@ -68,11 +78,11 @@ export default function CountryPage({ params }: { params: { code: string } }) {
         <div className="container-custom">
           <nav className="flex" aria-label="面包屑导航">
             <ol className="flex items-center space-x-2 text-sm text-gray-500">
-              <li><Link href="/" className="hover:text-primary-600">首页</Link></li>
+              <li><Link href="/zh" className="hover:text-primary-600">首页</Link></li>
               <li><span className="px-2">/</span></li>
-              <li><Link href="/countries" className="hover:text-primary-600">国家索引</Link></li>
+              <li><Link href="/zh/countries" className="hover:text-primary-600">国家索引</Link></li>
               <li><span className="px-2">/</span></li>
-              <li><Link href={`/continent/${country.continent.toLowerCase()}`} className="hover:text-primary-600">{country.continent}</Link></li>
+              <li><Link href={`/zh/continent/${country.continent.toLowerCase()}`} className="hover:text-primary-600">{country.continent}</Link></li>
               <li><span className="px-2">/</span></li>
               <li className="font-medium text-primary-600">{country.name}</li>
             </ol>
@@ -158,7 +168,7 @@ export default function CountryPage({ params }: { params: { code: string } }) {
             <div className="bg-gray-50 rounded-xl p-4 flex items-center">
               <GlobeIcon className="h-5 w-5 text-primary-600 mr-3 flex-shrink-0" />
               <p className="text-sm text-gray-600">
-                数据来源：Natural Earth • 使用<Link href="/license" className="text-primary-600 hover:underline"> CC BY 4.0 </Link>授权，可免费用于个人和商业项目
+                数据来源：Natural Earth • 使用<Link href="/zh/license" className="text-primary-600 hover:underline"> CC BY 4.0 </Link>授权，可免费用于个人和商业项目
               </p>
             </div>
           </div>
@@ -186,7 +196,7 @@ export default function CountryPage({ params }: { params: { code: string } }) {
               <CardContent className="p-4">
                 <CardTitle className="text-lg mb-3">加拿大</CardTitle>
                 <Button variant="outline" size="sm" className="w-full" asChild>
-                  <Link href="/country/can">
+                  <Link href="/zh/country/can">
                     查看详情
                   </Link>
                 </Button>
@@ -199,4 +209,4 @@ export default function CountryPage({ params }: { params: { code: string } }) {
       </section>
     </>
   );
-}
+} 

@@ -1,44 +1,49 @@
-import { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 
-// 基础元数据
+// 基本元数据配置
 export const baseMetadata: Metadata = {
-  metadataBase: new URL('https://www.countryoutlines.com'), // 请替换为实际网站URL
   title: {
-    default: '全球国家轮廓地图SVG下载 | 高质量矢量地图资源',
-    template: '%s | 国家轮廓图资源网'
+    template: '%s | 国家轮廓图资源网',
+    default: '国家轮廓图资源网 - 高质量SVG国家边界',
   },
-  description: '免费下载200+国家和地区的高质量SVG轮廓地图，用于网页设计、数据可视化、PowerBI和教育演示。',
-  keywords: ['国家轮廓图', 'SVG地图', '矢量地图', '地图下载', '国家边界图', '世界地图素材'],
+  description: '免费提供200+国家和地区的SVG、EPS和PNG格式高质量轮廓图，适用于设计、数据可视化与教育',
+  keywords: ['国家轮廓', '地图资源', 'SVG地图', '国家边界', '矢量地图'],
   authors: [{ name: '国家轮廓图资源网团队' }],
   creator: '国家轮廓图资源网',
   publisher: '国家轮廓图资源网',
   formatDetection: {
     email: false,
-    address: false,
     telephone: false,
   },
+  metadataBase: new URL('https://www.countryoutlines.com'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'zh-CN': '/zh',
+      'en-US': '/en',
+    },
+  },
   openGraph: {
-    type: 'website',
-    locale: 'zh_CN',
+    title: '国家轮廓图资源网 - 高质量SVG国家边界',
+    description: '免费提供200+国家和地区的SVG、EPS和PNG格式高质量轮廓图，适用于设计、数据可视化与教育',
     url: 'https://www.countryoutlines.com',
     siteName: '国家轮廓图资源网',
-    title: '全球国家轮廓地图SVG下载 | 高质量矢量地图资源',
-    description: '免费下载200+国家和地区的高质量SVG轮廓地图，用于网页设计、数据可视化和教育演示。',
     images: [
       {
-        url: 'https://www.countryoutlines.com/og-image.jpg', // 请替换为实际图片URL
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: '国家轮廓图资源网预览图',
+        alt: '国家轮廓图资源网 - 全球国家轮廓地图一站式下载',
       },
     ],
+    locale: 'zh_CN',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: '全球国家轮廓地图SVG下载 | 高质量矢量地图资源',
-    description: '免费下载200+国家和地区的高质量SVG轮廓地图，用于网页设计、数据可视化和教育演示。',
-    images: ['https://www.countryoutlines.com/twitter-image.jpg'], // 请替换为实际图片URL
-    creator: '@countryoutlines', // 请替换为实际Twitter账号
+    title: '国家轮廓图资源网 - 高质量SVG国家边界',
+    description: '免费提供200+国家和地区的SVG、EPS和PNG格式高质量轮廓图',
+    images: ['/twitter-image.jpg'],
   },
   robots: {
     index: true,
@@ -52,45 +57,59 @@ export const baseMetadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      {
+        rel: 'mask-icon',
+        url: '/safari-pinned-tab.svg',
+      },
+    ],
   },
-  verification: {
-    google: 'google-site-verification-code', // 请替换为实际验证码
-    yandex: 'yandex-verification-code', // 如需要
-    baidu: 'baidu-site-verification-code', // 如需要
-  },
-  alternates: {
-    canonical: 'https://www.countryoutlines.com',
-    languages: {
-      'en-US': 'https://www.countryoutlines.com/en',
-      'zh-CN': 'https://www.countryoutlines.com',
-    },
-  },
+  manifest: '/site.webmanifest',
+  category: 'geography',
 };
 
-// 辅助函数 - 生成特定国家页面的元数据
-export function generateCountryMetadata(country: { name: string, code: string, continent: string }): Metadata {
-  const title = `${country.name}轮廓地图下载 | SVG、EPS和PNG格式`;
-  const description = `免费下载高质量${country.name}轮廓地图SVG矢量图，适用于网页设计、数据可视化、PowerBI和教育演示。`;
-  return {
-    title,
-    description,
-    keywords: [`${country.name}轮廓图`, `${country.name}地图`, `${country.name}边界图`, `${country.code}地图`, '矢量地图', 'SVG地图'],
-    alternates: {
-      canonical: `https://www.countryoutlines.com/country/${country.code.toLowerCase()}`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `https://www.countryoutlines.com/country/${country.code.toLowerCase()}`,
-      images: [{
-        url: `https://www.countryoutlines.com/maps/${country.code.toLowerCase()}-outline-preview.jpg`,
-        width: 1200,
-        height: 630,
-        alt: `${country.name}轮廓地图预览`,
-      }],
-    },
-  };
+// 根据语言获取元数据
+export function getMetadata(lang: 'zh' | 'en'): Metadata {
+  if (lang === 'en') {
+    return {
+      ...baseMetadata,
+      title: {
+        template: '%s | Country Outlines Resource',
+        default: 'Country Outlines Resource - High Quality SVG Country Borders',
+      },
+      description: 'Free high-quality outline maps of 200+ countries and regions in SVG, EPS and PNG formats for design, data visualization and education',
+      keywords: ['country outlines', 'map resources', 'SVG maps', 'country borders', 'vector maps'],
+      authors: [{ name: 'Country Outlines Resource Team' }],
+      creator: 'Country Outlines Resource',
+      publisher: 'Country Outlines Resource',
+      alternates: {
+        canonical: '/en',
+        languages: {
+          'zh-CN': '/zh',
+          'en-US': '/en',
+        },
+      },
+      openGraph: {
+        ...baseMetadata.openGraph,
+        title: 'Country Outlines Resource - High Quality SVG Country Borders',
+        description: 'Free high-quality outline maps of 200+ countries and regions in SVG, EPS and PNG formats',
+        locale: 'en_US',
+      },
+      twitter: {
+        ...baseMetadata.twitter,
+        title: 'Country Outlines Resource - High Quality SVG Country Borders',
+        description: 'Free high-quality outline maps of 200+ countries and regions in SVG, EPS and PNG formats',
+      },
+    };
+  }
+  
+  return baseMetadata;
 }
