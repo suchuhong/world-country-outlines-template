@@ -1,0 +1,27 @@
+{
+  "name": "world-country-outlines",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "autoprefixer": "latest",
+    "class-variance-authority": "latest",
+    "lucide-react": "latest",
+    "next": "latest",
+    "postcss": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "22.15.18",
+    "@types/react": "19.1.4"
+  }
+}
