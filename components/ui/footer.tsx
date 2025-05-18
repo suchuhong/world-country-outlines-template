@@ -7,8 +7,8 @@ export function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
       <div className="container-custom py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-          <div className="space-y-4">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
+          <div className="space-y-4 sm:col-span-2 md:col-span-1">
             <div className="flex items-center gap-2">
               <GlobeIcon className="h-6 w-6 text-primary-600" />
               <span className="text-lg font-heading font-bold text-primary-600">国家轮廓图</span>
@@ -26,7 +26,7 @@ export function Footer() {
             </div>
           </div>
           
-          <div>
+          <div className="sm:col-span-1">
             <h3 className="font-medium text-gray-900 mb-4">快速链接</h3>
             <ul className="space-y-3">
               <li><Link href="/" className="text-sm text-gray-600 hover:text-primary-600">首页</Link></li>
@@ -36,7 +36,7 @@ export function Footer() {
             </ul>
           </div>
           
-          <div>
+          <div className="sm:col-span-1">
             <h3 className="font-medium text-gray-900 mb-4">资源分类</h3>
             <ul className="space-y-3">
               <li><Link href="/continent/asia" className="text-sm text-gray-600 hover:text-primary-600">亚洲国家</Link></li>
@@ -47,7 +47,7 @@ export function Footer() {
             </ul>
           </div>
           
-          <div>
+          <div className="sm:col-span-2 md:col-span-1">
             <h3 className="font-medium text-gray-900 mb-4">其他信息</h3>
             <ul className="space-y-3">
               <li><Link href="/license" className="text-sm text-gray-600 hover:text-primary-600">许可说明</Link></li>

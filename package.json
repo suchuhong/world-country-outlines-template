@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.2",
-    "autoprefixer": "latest",
+    "autoprefixer": "10.4.21",
     "class-variance-authority": "latest",
     "clsx": "^2.1.1",
     "lucide-react": "latest",
@@ -19,7 +19,7 @@
     "react": "latest",
     "react-dom": "latest",
     "tailwind-merge": "^3.3.0",
-    "tailwindcss": "latest",
+    "tailwindcss": "3",
     "typescript": "latest"
   },
   "license": "MIT",

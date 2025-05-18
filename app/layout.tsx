@@ -33,6 +33,8 @@ export default function RootLayout({
             })
           }}
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="theme-color" content="#0F3460" />
       </head>
       <body className="antialiased bg-white text-gray-800 min-h-screen flex flex-col">
         <Navbar />

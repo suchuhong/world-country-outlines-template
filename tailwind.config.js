@@ -68,6 +68,9 @@ module.exports = {
         card: '0 4px 20px rgba(15, 52, 96, 0.1)',
         hover: '0 8px 30px rgba(15, 52, 96, 0.15)',
       },
+      screens: {
+        'xs': '475px',
+      },
     },
   },
   plugins: [],

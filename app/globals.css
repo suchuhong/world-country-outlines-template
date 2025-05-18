@@ -35,6 +35,14 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-400;
   }
+  
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  .btn-mobile {
+    @apply py-3 px-5;
+  }
 }
 
 /* Custom fonts or overrides can go here */

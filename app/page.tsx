@@ -72,15 +72,15 @@ export default function Home() {
         />
         <div className="container-custom section-padding">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
               全球国家轮廓地图 <span className="text-accent-400">一站式下载</span>
             </h1>
-            <p className="mt-6 text-lg leading-8 text-white/90 max-w-3xl mx-auto">
+            <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl leading-relaxed text-white/90 max-w-3xl mx-auto">
               免费提供 <strong>200+ 国家/地区高清矢量边界</strong>
               （SVG · EPS · PNG），助您轻松完成网页设计、Power BI 可视化、教育演示与印刷制图。
             </p>
 
-            <div className="mt-10 flex w-full items-center justify-center gap-3">
+            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row w-full items-center justify-center gap-3">
               <div className="relative w-full max-w-md">
                 <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                 <Input
@@ -92,7 +92,7 @@ export default function Home() {
               </div>
               <Button 
                 variant="default" 
-                className="h-12 px-6 text-base bg-accent-500 hover:bg-accent-600 text-white"
+                className="h-12 px-6 text-base bg-accent-500 hover:bg-accent-600 text-white mt-3 sm:mt-0 w-full sm:w-auto"
               >
                 搜索
               </Button>
@@ -184,21 +184,18 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {popularCountries.map((c) => (
+          <div className="grid gap-4 grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+            {popularCountries.map((c, index) => (
               <Card key={c.code} className="group overflow-hidden shadow-card hover:shadow-hover transition-all duration-300">
                 <CardHeader className="p-0 bg-gray-50">
                   <div className="relative pt-[65%] overflow-hidden">
                     <Image
                       src={c.image}
                       alt={c.alt}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full object-contain p-6 transition-transform duration-300 group-hover:scale-105"
-                      width={300}
-                      height={160}
-                      quality={90}
-                      placeholder="blur"
-                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMTYwIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE2MCIgZmlsbD0iI2YzZjRmNiIvPjwvc3ZnPg=="
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className="object-contain p-6 transition-transform duration-300 group-hover:scale-105"
+                      priority={index < 4}
                     />
                   </div>
                 </CardHeader>
