@@ -116,7 +116,7 @@ export function Footer() {
         
         <div className="mt-12 pt-8 border-t border-gray-200">
           <p className="text-center text-sm text-gray-500">
-            {t.copyright.replace('{year}', currentYear)} <a href="https://creativecommons.org/licenses/by/4.0/" className="text-primary-600 hover:underline">{t.ccLicense}</a> {lang === 'zh' ? '许可.' : 'license.'}
+            {t.copyright.replace('{year}', currentYear.toString())} <a href="https://creativecommons.org/licenses/by/4.0/" className="text-primary-600 hover:underline">{t.ccLicense}</a> {lang === 'zh' ? '许可.' : 'license.'}
           </p>
         </div>
       </div>

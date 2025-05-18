@@ -13,8 +13,9 @@ const countryData = {
 };
 
 // Generate metadata dynamically
-export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
-  const code = params.code.toUpperCase();
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const code = resolvedParams.code.toUpperCase();
   const country = countryData[code as keyof typeof countryData];
   
   if (!country) {
@@ -29,17 +30,22 @@ export async function generateMetadata({ params }: { params: { code: string } })
     description: `Free high-quality ${country.name} vector outline map in SVG, EPS and PNG formats for web design, data visualization and more.`,
     keywords: [`${country.name} outline`, `${country.name} map`, `${country.name} vector`, `${country.name} border`, `${country.code} map`],
     alternates: {
-      canonical: `/en/country/${params.code.toLowerCase()}`,
+      canonical: `/en/country/${resolvedParams.code.toLowerCase()}`,
       languages: {
-        'zh-CN': `/zh/country/${params.code.toLowerCase()}`,
-        'en-US': `/en/country/${params.code.toLowerCase()}`,
+        'zh-CN': `/zh/country/${resolvedParams.code.toLowerCase()}`,
+        'en-US': `/en/country/${resolvedParams.code.toLowerCase()}`,
       },
     },
   };
 }
 
-export default function CountryPage({ params }: { params: { code: string } }) {
-  const code = params.code.toUpperCase();
+interface CountryPageProps {
+  params: Promise<{ code: string }>;
+}
+
+export default async function CountryPage({ params }: CountryPageProps) {
+  const resolvedParams = await params;
+  const code = resolvedParams.code.toUpperCase();
   const country = countryData[code as keyof typeof countryData];
   
   if (!country) {

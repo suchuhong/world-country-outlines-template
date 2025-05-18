@@ -13,8 +13,9 @@ const countryData = {
 };
 
 // 动态生成元数据
-export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
-  const code = params.code.toUpperCase();
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const code = resolvedParams.code.toUpperCase();
   const country = countryData[code as keyof typeof countryData];
   
   if (!country) {
@@ -29,17 +30,22 @@ export async function generateMetadata({ params }: { params: { code: string } })
     description: `免费提供高质量${country.name}矢量轮廓地图，支持SVG、EPS和PNG格式，适用于网页设计、数据可视化等项目。`,
     keywords: [`${country.name}轮廓`, `${country.name}地图`, `${country.name}矢量`, `${country.name}边界`, `${country.code}地图`],
     alternates: {
-      canonical: `/zh/country/${params.code.toLowerCase()}`,
+      canonical: `/zh/country/${resolvedParams.code.toLowerCase()}`,
       languages: {
-        'zh-CN': `/zh/country/${params.code.toLowerCase()}`,
-        'en-US': `/en/country/${params.code.toLowerCase()}`,
+        'zh-CN': `/zh/country/${resolvedParams.code.toLowerCase()}`,
+        'en-US': `/en/country/${resolvedParams.code.toLowerCase()}`,
       },
     },
   };
 }
 
-export default function CountryPage({ params }: { params: { code: string } }) {
-  const code = params.code.toUpperCase();
+interface CountryPageProps {
+  params: Promise<{ code: string }>;
+}
+
+export default async function CountryPage({ params }: CountryPageProps) {
+  const resolvedParams = await params;
+  const code = resolvedParams.code.toUpperCase();
   const country = countryData[code as keyof typeof countryData];
   
   if (!country) {
