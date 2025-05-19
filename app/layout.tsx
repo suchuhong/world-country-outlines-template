@@ -14,6 +14,7 @@ export default function RootLayout({
     <html lang="zh-CN" className="scroll-smooth">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="google-site-verification" content="gkvHXgHst9RwHUR-mnPFzlLn5JuxEMDeQL74MW3lnRA" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
