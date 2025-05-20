@@ -3,7 +3,7 @@
 // 基本元数据配置
 export const baseMetadata: Metadata = {
   title: {
-    template: '%s | 国家轮廓图资源网',
+    template: '%s',
     default: '国家轮廓图资源网 - 高质量SVG国家边界',
   },
   description: '免费提供200+国家和地区的SVG、EPS和PNG格式高质量轮廓图，适用于设计、数据可视化与教育',
