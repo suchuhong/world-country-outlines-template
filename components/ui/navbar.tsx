@@ -41,7 +41,13 @@ export function Navbar() {
       { href: '/ja/countries', label: '国別インデックス' },
       { href: '/ja/formats', label: 'ダウンロード情報' },
       { href: '/ja/about', label: 'サイトについて' },
-    ]
+    ],
+    ko: [
+      { href: '/ko', label: '홈' },
+      { href: '/ko/countries', label: '국가 색인' },
+      { href: '/ko/formats', label: '다운로드 정보' },
+      { href: '/ko/about', label: '소개' },
+    ],
   };
 
   const currentMenuItems = menuItems[currentLang as keyof typeof menuItems] || menuItems.en;
@@ -50,21 +56,24 @@ export function Navbar() {
   const siteTitles = {
     en: 'Country Outlines',
     zh: '国家轮廓图',
-    ja: '国境線マップ'
+    ja: '国境線マップ',
+    ko: '국가 윤곽도'
   };
 
   // 菜单按钮文本
   const menuButtonLabels = {
     en: { open: 'Open Menu', close: 'Close Menu' },
     zh: { open: '打开菜单', close: '关闭菜单' },
-    ja: { open: 'メニューを開く', close: 'メニューを閉じる' }
+    ja: { open: 'メニューを開く', close: 'メニューを閉じる' },
+    ko: { open: '메뉴 열기', close: '메뉴 닫기' }
   };
 
   // 搜索框占位符
   const searchPlaceholders = {
     en: 'Enter country or ISO code...',
     zh: '输入国家或 ISO 代码...',
-    ja: '国名またはISOコードを入力...'
+    ja: '国名またはISOコードを入力...',
+    ko: '국가명 또는 ISO 코드를 입력...'
   };
 
   return (
@@ -137,7 +146,7 @@ export function Navbar() {
           
           <div className="pt-6 mt-6 border-t border-gray-200">
             <p className="text-sm text-gray-500 mb-4">
-              {currentLang === 'en' ? 'Quick Search' : currentLang === 'zh' ? '快速搜索' : 'クイック検索'}
+              {currentLang === 'en' ? 'Quick Search' : currentLang === 'zh' ? '快速搜索' : currentLang === 'ja' ? 'クイック検索' : currentLang === 'ko' ? '퀵 서치' : 'クイック検索'}
             </p>
             <div className="relative">
               <input

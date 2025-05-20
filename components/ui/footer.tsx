@@ -76,6 +76,28 @@ export function Footer() {
       contact: 'お問い合わせ',
       copyright: '© {year} 国境線マップリソース. ライセンス:',
       ccLicense: 'CC BY 4.0'
+    },
+    ko: {
+      siteTitle: '국가 윤곽도',
+      description: '디자이너, 데이터 분석가, 교육자를 위한 고품질 국가 윤곽 지도 리소스입니다.',
+      quickLinks: '퀵 링크',
+      home: '홈',
+      countries: '국가 색인',
+      formats: '형식 정보',
+      about: '소개',
+      resources: '리소스',
+      asia: '아시아 국가',
+      europe: '유럽 국가',
+      america: '아메리카 국가',
+      africa: '아프리카 국가',
+      oceania: '오세아니아 국가',
+      otherInfo: '기타 정보',
+      license: '라이선스 정보',
+      attribution: '데이터 소스',
+      faq: '자주 묻는 질문',
+      contact: '문의하기',
+      copyright: '© {year} 국가 윤곽도 리소스. 라이선스:',
+      ccLicense: 'CC BY 4.0'
     }
   };
   

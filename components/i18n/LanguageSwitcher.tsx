@@ -3,6 +3,13 @@
 import { usePathname, useParams, useRouter } from 'next/navigation';
 import { languages } from './config';
 import { Button } from '@/components/ui/button';
+import { GlobeIcon, ChevronDown } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function LanguageSwitcher() {
   const pathname = usePathname();
@@ -32,18 +39,25 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex items-center space-x-2">
-      {Object.entries(languages).map(([code, name]) => (
-        <Button
-          key={code}
-          variant={code === currentLang ? 'default' : 'outline'}
-          size="sm"
-          onClick={() => handleLanguageSwitch(code)}
-          className={code === currentLang ? 'bg-sky-600' : ''}
-        >
-          {name}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm" className="flex items-center gap-2">
+          <GlobeIcon className="h-4 w-4" />
+          <span>{languages[currentLang as keyof typeof languages]}</span>
+          <ChevronDown className="h-4 w-4" />
         </Button>
-      ))}
-    </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {Object.entries(languages).map(([code, name]) => (
+          <DropdownMenuItem
+            key={code}
+            onClick={() => handleLanguageSwitch(code)}
+            className={code === currentLang ? 'bg-accent-50 text-accent-900' : ''}
+          >
+            {name}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
