@@ -12,9 +12,7 @@ export default function KoreanLayout({
 }) {
   return (
     <>
-      <Navbar />
       {children}
-      <Footer />
     </>
   );
 } 
