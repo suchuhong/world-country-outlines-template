@@ -15,7 +15,7 @@ export default function RootPage() {
         : defaultLanguage;
         
     // Check if the language is supported
-    const lang = ['en', 'zh'].includes(userLang) ? userLang : defaultLanguage;
+    const lang = ['en', 'zh', 'ja'].includes(userLang) ? userLang : defaultLanguage;
     
     // Redirect to the appropriate language version
     router.push(`/${lang}`);

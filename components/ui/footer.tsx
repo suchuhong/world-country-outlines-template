@@ -9,7 +9,7 @@ export function Footer() {
   const pathname = usePathname();
   const currentLang = pathname.split('/')[1];
   
-  // English and Chinese text content
+  // 多语言文本内容
   const content = {
     en: {
       siteTitle: 'Country Outlines',
@@ -54,11 +54,32 @@ export function Footer() {
       contact: '联系我们',
       copyright: '© {year} 国家轮廓图资源网. 基于',
       ccLicense: 'CC BY 4.0'
+    },
+    ja: {
+      siteTitle: '国境線マップ',
+      description: 'デザイナー、データアナリスト、教育者向けの高品質な国境線マップリソース。',
+      quickLinks: 'クイックリンク',
+      home: 'ホーム',
+      countries: '国別インデックス',
+      formats: 'フォーマット情報',
+      about: 'サイトについて',
+      resources: 'リソース',
+      asia: 'アジア諸国',
+      europe: 'ヨーロッパ諸国',
+      america: 'アメリカ諸国',
+      africa: 'アフリカ諸国',
+      oceania: 'オセアニア諸国',
+      otherInfo: 'その他の情報',
+      license: 'ライセンス情報',
+      attribution: 'データソース',
+      faq: 'よくある質問',
+      contact: 'お問い合わせ',
+      copyright: '© {year} 国境線マップリソース. ライセンス:',
+      ccLicense: 'CC BY 4.0'
     }
   };
   
-  const lang = currentLang === 'en' ? 'en' : 'zh';
-  const t = content[lang];
+  const t = content[currentLang as keyof typeof content] || content.en;
   
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
@@ -116,7 +137,7 @@ export function Footer() {
         
         <div className="mt-12 pt-8 border-t border-gray-200">
           <p className="text-center text-sm text-gray-500">
-            {t.copyright.replace('{year}', currentYear.toString())} <a href="https://creativecommons.org/licenses/by/4.0/" className="text-primary-600 hover:underline">{t.ccLicense}</a> {lang === 'zh' ? '许可.' : 'license.'}
+            {t.copyright.replace('{year}', currentYear.toString())} <a href="https://creativecommons.org/licenses/by/4.0/" className="text-primary-600 hover:underline">{t.ccLicense}</a> {currentLang === 'zh' ? '许可.' : currentLang === 'ja' ? 'ライセンス.' : 'license.'}
           </p>
         </div>
       </div>

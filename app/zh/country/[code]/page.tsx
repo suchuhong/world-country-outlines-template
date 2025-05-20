@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DownloadIcon, ArrowLeftIcon, GlobeIcon } from 'lucide-react';
+import SvgPreview from '@/components/SvgPreview';
+import { promises as fs } from 'fs';
+import path from 'path';
 
 // 这里仅作演示用途，实际中应该从数据库或API获取
 const countryData = {
@@ -62,6 +65,10 @@ export default async function CountryPage({ params }: CountryPageProps) {
     );
   }
   
+  // 读取SVG文件内容
+  const svgPath = path.join(process.cwd(), 'public', country.image);
+  const svgContent = await fs.readFile(svgPath, 'utf-8');
+  
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'ImageObject',
@@ -100,13 +107,10 @@ export default async function CountryPage({ params }: CountryPageProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="bg-white rounded-2xl shadow-card overflow-hidden">
             <div className="p-6 bg-gray-50 flex items-center justify-center h-[400px]">
-              <Image
-                src={country.image}
-                alt={`${country.name}轮廓地图`}
+              <SvgPreview
+                svgContent={svgContent}
                 width={400}
                 height={400}
-                className="object-contain max-h-full"
-                quality={100}
               />
             </div>
           </div>
