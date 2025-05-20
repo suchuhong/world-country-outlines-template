@@ -4,19 +4,19 @@ import { Language } from '@/components/i18n/config';
 const metadata: Record<Language, Metadata> = {
   en: {
     title: 'World Country Outlines',
-    description: 'Explore and download high-quality SVG country outlines',
+    description: 'High-quality SVG, EPS, PNG country outlines for 200+ countries. Free download for design and visualization.',
   },
   zh: {
     title: '世界国家轮廓',
-    description: '探索并下载高质量SVG国家轮廓',
+    description: '200+国家和地区SVG、EPS、PNG高质量轮廓图，免费下载，适用于设计和可视化。',
   },
   ja: {
     title: '世界の国境線',
-    description: '高品質なSVG国境線を探索してダウンロード',
+    description: '200以上の国と地域の高品質なSVG・EPS・PNG輪郭地図。無料ダウンロード。',
   },
   ko: {
     title: '세계 국가 윤곽선',
-    description: '고품질 SVG 국가 윤곽선을 탐색하고 다운로드하세요',
+    description: '200개 이상의 국가 SVG, EPS, PNG 윤곽도. 무료 다운로드, 디자인과 시각화에 적합.',
   },
 };
 
